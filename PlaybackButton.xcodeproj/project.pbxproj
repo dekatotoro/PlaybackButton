@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C5D0432D1C367E580088850C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D0432B1C367E580088850C /* String.swift */; };
+		C5D0432E1C367E580088850C /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D0432C1C367E580088850C /* UIColor.swift */; };
 		C5ED1EBE1C1E880900F8F27F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5ED1EBD1C1E880900F8F27F /* AppDelegate.swift */; };
 		C5ED1EC01C1E880900F8F27F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5ED1EBF1C1E880900F8F27F /* ViewController.swift */; };
 		C5ED1EC31C1E880900F8F27F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5ED1EC11C1E880900F8F27F /* Main.storyboard */; };
@@ -14,6 +16,7 @@
 		C5ED1EC81C1E880900F8F27F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5ED1EC61C1E880900F8F27F /* LaunchScreen.storyboard */; };
 		C5ED1ED31C1E880900F8F27F /* PlaybackButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5ED1ED21C1E880900F8F27F /* PlaybackButtonTests.swift */; };
 		C5ED1EDE1C1E880900F8F27F /* PlaybackButtonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5ED1EDD1C1E880900F8F27F /* PlaybackButtonUITests.swift */; };
+		C5ED1EF01C1E890500F8F27F /* PlaybackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5ED1EEF1C1E890500F8F27F /* PlaybackButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C5D0432B1C367E580088850C /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = String.swift; path = Extensions/String.swift; sourceTree = "<group>"; };
+		C5D0432C1C367E580088850C /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = Extensions/UIColor.swift; sourceTree = "<group>"; };
 		C5ED1EBA1C1E880900F8F27F /* PlaybackButton.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlaybackButton.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5ED1EBD1C1E880900F8F27F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5ED1EBF1C1E880900F8F27F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +52,7 @@
 		C5ED1ED91C1E880900F8F27F /* PlaybackButtonUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlaybackButtonUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5ED1EDD1C1E880900F8F27F /* PlaybackButtonUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackButtonUITests.swift; sourceTree = "<group>"; };
 		C5ED1EDF1C1E880900F8F27F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C5ED1EEF1C1E890500F8F27F /* PlaybackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,9 +80,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C5D0432A1C367E480088850C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C5D0432B1C367E580088850C /* String.swift */,
+				C5D0432C1C367E580088850C /* UIColor.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		C5ED1EB11C1E880900F8F27F = {
 			isa = PBXGroup;
 			children = (
+				C5ED1EEE1C1E88F700F8F27F /* Source */,
 				C5ED1EBC1C1E880900F8F27F /* PlaybackButton */,
 				C5ED1ED11C1E880900F8F27F /* PlaybackButtonTests */,
 				C5ED1EDC1C1E880900F8F27F /* PlaybackButtonUITests */,
@@ -97,6 +113,7 @@
 		C5ED1EBC1C1E880900F8F27F /* PlaybackButton */ = {
 			isa = PBXGroup;
 			children = (
+				C5D0432A1C367E480088850C /* Extensions */,
 				C5ED1EBD1C1E880900F8F27F /* AppDelegate.swift */,
 				C5ED1EBF1C1E880900F8F27F /* ViewController.swift */,
 				C5ED1EC11C1E880900F8F27F /* Main.storyboard */,
@@ -123,6 +140,14 @@
 				C5ED1EDF1C1E880900F8F27F /* Info.plist */,
 			);
 			path = PlaybackButtonUITests;
+			sourceTree = "<group>";
+		};
+		C5ED1EEE1C1E88F700F8F27F /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				C5ED1EEF1C1E890500F8F27F /* PlaybackButton.swift */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,8 +281,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5ED1EF01C1E890500F8F27F /* PlaybackButton.swift in Sources */,
 				C5ED1EC01C1E880900F8F27F /* ViewController.swift in Sources */,
+				C5D0432D1C367E580088850C /* String.swift in Sources */,
 				C5ED1EBE1C1E880900F8F27F /* AppDelegate.swift in Sources */,
+				C5D0432E1C367E580088850C /* UIColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +510,7 @@
 				C5ED1EE41C1E880900F8F27F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C5ED1EE51C1E880900F8F27F /* Build configuration list for PBXNativeTarget "PlaybackButtonTests" */ = {
 			isa = XCConfigurationList;
@@ -490,6 +519,7 @@
 				C5ED1EE71C1E880900F8F27F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C5ED1EE81C1E880900F8F27F /* Build configuration list for PBXNativeTarget "PlaybackButtonUITests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +528,7 @@
 				C5ED1EEA1C1E880900F8F27F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
