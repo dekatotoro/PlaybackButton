@@ -33,7 +33,7 @@ Add the `PlaybackButton.swift` file to your project.
 
 Add `import PlaybackButton` in your file
 
-In your app delegate:
+In your ViewController:
 
 ```swift
 @IBOutlet weak var playbackButton: PlaybackButton!
