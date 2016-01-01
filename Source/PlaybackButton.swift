@@ -9,14 +9,13 @@
 
 import UIKit
 
-
-@objc enum PlaybackButtonState : Int {
+@objc public enum PlaybackButtonState : Int {
     case None = 0
     case Pausing
     case Playing
     case Pending
     
-    var value: CGFloat {
+    public var value: CGFloat {
         switch self {
         case .None:
             return 0.0
@@ -29,7 +28,7 @@ import UIKit
         }
     }
     
-    func color(layer: PlaybackLayer) -> CGColor {
+    public func color(layer: PlaybackLayer) -> CGColor {
         switch self {
         case .None:
             return UIColor.whiteColor().CGColor
@@ -43,22 +42,22 @@ import UIKit
     }
 }
 
-@objc class PlaybackLayer: CALayer {
+@objc public class PlaybackLayer: CALayer {
     
     private static let kAnimationKey = "playbackValue"
     private static let kAnimationIdentifier = "playbackLayerAnimation"
     
-    var adjustMarginValue: CGFloat = 0
-    var contentEdgeInsets = UIEdgeInsetsZero
-    var buttonState = PlaybackButtonState.Pausing
-    var playbackValue: CGFloat = 1.0 {
+    public var adjustMarginValue: CGFloat = 0
+    public var contentEdgeInsets = UIEdgeInsetsZero
+    public var buttonState = PlaybackButtonState.Pausing
+    public var playbackValue: CGFloat = 1.0 {
         didSet {
             setNeedsDisplay()
         }
     }
-    var pausingColor = UIColor.whiteColor()
-    var playingColor = UIColor.whiteColor()
-    var pendingColor = UIColor.whiteColor()
+    public var pausingColor = UIColor.whiteColor()
+    public var playingColor = UIColor.whiteColor()
+    public var pendingColor = UIColor.whiteColor()
     
     override init() {
         super.init()
@@ -77,7 +76,7 @@ import UIKit
         }
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -85,7 +84,7 @@ import UIKit
         self.removeAllAnimations()
     }
     
-    func setButtonState(buttonState: PlaybackButtonState, animated: Bool) {
+    public func setButtonState(buttonState: PlaybackButtonState, animated: Bool) {
         if self.buttonState == buttonState {
             return
         }
@@ -113,7 +112,7 @@ import UIKit
         }
     }
     
-    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
+    public override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         if flag {
             if self.animationForKey(PlaybackLayer.kAnimationIdentifier) != nil {
                 self.removeAnimationForKey(PlaybackLayer.kAnimationIdentifier)
@@ -125,14 +124,14 @@ import UIKit
     }
 
     
-    override class func needsDisplayForKey(key: String) -> Bool {
+    public override class func needsDisplayForKey(key: String) -> Bool {
         if key == PlaybackLayer.kAnimationKey {
             return true
         }
         return CALayer.needsDisplayForKey(key)
     }
 
-    override func drawInContext(context: CGContext) {
+    public override func drawInContext(context: CGContext) {
         switch self.buttonState {
         case .None:
             return
@@ -175,21 +174,21 @@ import UIKit
 
 }
 
-@objc class PlaybackButton : UIButton {
+@objc public class PlaybackButton : UIButton {
     
-    private var playbackLayer: PlaybackLayer?
+    public var playbackLayer: PlaybackLayer?
     
-    var buttonState: PlaybackButtonState {
+    public var buttonState: PlaybackButtonState {
         return self.playbackLayer?.buttonState ?? PlaybackButtonState.Pausing
     }
 
-    override var contentEdgeInsets: UIEdgeInsets {
+    public override var contentEdgeInsets: UIEdgeInsets {
         didSet {
             self.playbackLayer?.contentEdgeInsets = self.contentEdgeInsets
         }
     }
     
-    var adjustMargin: CGFloat = 1 {
+    public var adjustMargin: CGFloat = 1 {
         didSet {
             self.playbackLayer?.adjustMarginValue = self.adjustMargin
         }
@@ -200,13 +199,31 @@ import UIKit
         self.addPlaybackLayer()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.addPlaybackLayer()
     }
     
-    override func awakeFromNib() {
+    public override func awakeFromNib() {
         super.awakeFromNib()
+    }
+    
+    public func setButtonState(buttonState: PlaybackButtonState, animated: Bool) {
+        self.playbackLayer?.setButtonState(buttonState, animated: animated)
+    }
+    
+    public func setButtonStateColor(buttonState: PlaybackButtonState, color: UIColor) {
+        switch buttonState {
+        case .None:
+            break
+        case .Pausing:
+            self.playbackLayer?.pausingColor = color
+        case .Playing:
+            self.playbackLayer?.playingColor = color
+        case .Pending:
+            self.playbackLayer?.pendingColor = color
+        }
+        
     }
     
     private func addPlaybackLayer() {
@@ -220,23 +237,5 @@ import UIKit
         playbackLayer.pendingColor = self.tintColor
         self.playbackLayer = playbackLayer
         self.layer.addSublayer(playbackLayer)
-    }
-    
-    func setButtonState(buttonState: PlaybackButtonState, animated: Bool) {
-        self.playbackLayer?.setButtonState(buttonState, animated: animated)
-    }
-    
-    func setButtonStateColor(buttonState: PlaybackButtonState, color: UIColor) {
-        switch buttonState {
-        case .None:
-            break
-        case .Pausing:
-            self.playbackLayer?.pausingColor = color
-        case .Playing:
-            self.playbackLayer?.playingColor = color
-        case .Pending:
-            self.playbackLayer?.pendingColor = color
-        }
-        
     }
 }
