@@ -38,7 +38,6 @@ In your app delegate:
 ```swift
 @IBOutlet weak var playbackButton: PlaybackButton!
 
-
 self.playbackButton.layer.cornerRadius = self.playbackButton.frame.size.height / 2
 self.playbackButton.layer.borderWidth = 2.0
 self.playbackButton.adjustMargin = 1
