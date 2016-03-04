@@ -58,6 +58,7 @@ import UIKit
     public var pausingColor = UIColor.whiteColor()
     public var playingColor = UIColor.whiteColor()
     public var pendingColor = UIColor.whiteColor()
+    public var playbackAnimationDuration: CFTimeInterval = PlaybackButton.kDefaultDuration
     
     override init() {
         super.init()
@@ -101,7 +102,7 @@ import UIKit
             let animation = CABasicAnimation(keyPath: PlaybackLayer.kAnimationKey)
             animation.fromValue = fromValue
             animation.toValue = toValue
-            animation.duration = 0.24
+            animation.duration = self.playbackAnimationDuration
             animation.removedOnCompletion = true
             animation.fillMode = kCAFillModeForwards
             animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
@@ -176,7 +177,13 @@ import UIKit
 
 @objc public class PlaybackButton : UIButton {
     
+    static let kDefaultDuration: CFTimeInterval = 0.24
     public var playbackLayer: PlaybackLayer?
+    public var duration: CFTimeInterval = PlaybackButton.kDefaultDuration {
+        didSet {
+            self.playbackLayer?.playbackAnimationDuration = self.duration
+        }
+    }
     
     public var buttonState: PlaybackButtonState {
         return self.playbackLayer?.buttonState ?? PlaybackButtonState.Pausing
@@ -211,8 +218,14 @@ import UIKit
     public func setButtonState(buttonState: PlaybackButtonState, animated: Bool) {
         self.playbackLayer?.setButtonState(buttonState, animated: animated)
     }
+
+    public func setButtonColor(color: UIColor) {
+        self.playbackLayer?.pausingColor = color
+        self.playbackLayer?.playingColor = color
+        self.playbackLayer?.pendingColor = color
+    }
     
-    public func setButtonStateColor(buttonState: PlaybackButtonState, color: UIColor) {
+    public func setButtonColor(color: UIColor, buttonState: PlaybackButtonState) {
         switch buttonState {
         case .None:
             break
@@ -223,7 +236,6 @@ import UIKit
         case .Pending:
             self.playbackLayer?.pendingColor = color
         }
-        
     }
     
     private func addPlaybackLayer() {
@@ -235,6 +247,7 @@ import UIKit
         playbackLayer.pausingColor = self.tintColor
         playbackLayer.playingColor = self.tintColor
         playbackLayer.pendingColor = self.tintColor
+        playbackLayer.playbackAnimationDuration = self.duration
         self.playbackLayer = playbackLayer
         self.layer.addSublayer(playbackLayer)
     }
