@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -18,26 +18,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vsY-i2-TnE" customClass="PlaybackButton" customModule="PlaybackButton" customModuleProvider="target">
-                                <rect key="frame" x="100" y="20" width="100" height="100"/>
-                                <color key="backgroundColor" red="0.73725490199999999" green="0.66666666669999997" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="100" y="30" width="100" height="80"/>
+                                <color key="backgroundColor" red="0.17254901960784313" green="0.24313725490196078" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="Bav-rn-Nc5"/>
-                                    <constraint firstAttribute="height" constant="100" id="XdI-UG-R2Z"/>
+                                    <constraint firstAttribute="height" constant="80" id="XdI-UG-R2Z"/>
                                 </constraints>
-                                <color key="tintColor" red="1" green="0.22075504430000001" blue="0.66551069110000005" alpha="1" colorSpace="calibratedRGB"/>
-                                <inset key="contentEdgeInsets" minX="24" minY="24" maxX="0.0" maxY="0.0"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="contentEdgeInsets" minX="28" minY="16" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <action selector="didTapPlaybackButton2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MFS-2b-y1H"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vqm-fZ-xxS" customClass="PlaybackButton" customModule="PlaybackButton" customModuleProvider="target">
                                 <rect key="frame" x="200" y="20" width="100" height="100"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.17254901960784313" green="0.24313725490196078" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="7g0-66-c2n"/>
                                     <constraint firstAttribute="width" constant="100" id="vmy-I1-rWZ"/>
                                 </constraints>
-                                <color key="tintColor" red="0.61176470589999998" green="0.80000000000000004" blue="0.39607843139999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="contentEdgeInsets" minX="24" minY="24" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <action selector="didTapPlaybackButton3:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F4W-HS-rOk"/>
@@ -45,6 +45,8 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h10-Ij-Wxl" customClass="PlaybackButton" customModule="PlaybackButton" customModuleProvider="target">
                                 <rect key="frame" x="300" y="40" width="60" height="60"/>
+                                <color key="backgroundColor" red="0.17254901960784313" green="0.24313725490196078" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="didTapPlaybackButton4:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Nr-FP-2Yf"/>
                                 </connections>
@@ -55,7 +57,7 @@
                                     <constraint firstAttribute="height" constant="300" id="722-H6-os6"/>
                                     <constraint firstAttribute="width" constant="300" id="tfO-Me-lPc"/>
                                 </constraints>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.17254901960784313" green="0.24313725490196078" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="contentEdgeInsets" minX="60" minY="60" maxX="60" maxY="60"/>
                                 <connections>
                                     <action selector="didTapPlaybackButton5:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zIZ-7j-l6c"/>
@@ -68,7 +70,7 @@
                             <constraint firstItem="vsY-i2-TnE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="100" id="DZG-2m-k6r"/>
                             <constraint firstItem="cZN-Gr-N2I" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="b1v-a4-eLb"/>
                             <constraint firstItem="Vqm-fZ-xxS" firstAttribute="leading" secondItem="vsY-i2-TnE" secondAttribute="trailing" id="gjO-fM-Dgg"/>
-                            <constraint firstItem="vsY-i2-TnE" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="pyX-21-elY"/>
+                            <constraint firstItem="vsY-i2-TnE" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="pyX-21-elY"/>
                             <constraint firstItem="cZN-Gr-N2I" firstAttribute="top" secondItem="Vqm-fZ-xxS" secondAttribute="bottom" id="wdd-bX-kSJ"/>
                         </constraints>
                     </view>
