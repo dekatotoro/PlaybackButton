@@ -14,7 +14,7 @@ extension String {
         return self.characters.count
     }
     
-    func substring(from: Int) -> String {
-        return self.substringFromIndex(self.startIndex.advancedBy(from))
+    func substring(_ from: Int) -> String {
+        return self.substring(from: self.characters.index(self.startIndex, offsetBy: from))
     }
 }

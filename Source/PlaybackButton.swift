@@ -10,61 +10,61 @@
 import UIKit
 
 @objc public enum PlaybackButtonState : Int {
-    case None = 0
-    case Pausing
-    case Playing
-    case Pending
+    case none = 0
+    case pausing
+    case playing
+    case pending
     
     public var value: CGFloat {
         switch self {
-        case .None:
+        case .none:
             return 0.0
-        case .Pausing:
+        case .pausing:
             return 1.0
-        case .Playing:
+        case .playing:
             return 0.0
-        case .Pending:
+        case .pending:
             return 1.0
         }
     }
     
-    public func color(layer: PlaybackLayer) -> CGColor {
+    public func color(_ layer: PlaybackLayer) -> CGColor {
         switch self {
-        case .None:
-            return UIColor.whiteColor().CGColor
-        case .Pausing:
-            return layer.pausingColor.CGColor
-        case .Playing:
-            return layer.playingColor.CGColor
-        case .Pending:
-            return layer.pendingColor.CGColor
+        case .none:
+            return UIColor.white.cgColor
+        case .pausing:
+            return layer.pausingColor.cgColor
+        case .playing:
+            return layer.playingColor.cgColor
+        case .pending:
+            return layer.pendingColor.cgColor
         }
     }
 }
 
-@objc public class PlaybackLayer: CALayer {
+@objc open class PlaybackLayer: CALayer {
     
-    private static let kAnimationKey = "playbackValue"
-    private static let kAnimationIdentifier = "playbackLayerAnimation"
+    fileprivate static let kAnimationKey = "playbackValue"
+    fileprivate static let kAnimationIdentifier = "playbackLayerAnimation"
     
-    public var adjustMarginValue: CGFloat = 0
-    public var contentEdgeInsets = UIEdgeInsetsZero
-    public var buttonState = PlaybackButtonState.Pausing
-    public var playbackValue: CGFloat = 1.0 {
+    open var adjustMarginValue: CGFloat = 0
+    open var contentEdgeInsets = UIEdgeInsets.zero
+    open var buttonState = PlaybackButtonState.pausing
+    open var playbackValue: CGFloat = 1.0 {
         didSet {
             setNeedsDisplay()
         }
     }
-    public var pausingColor = UIColor.whiteColor()
-    public var playingColor = UIColor.whiteColor()
-    public var pendingColor = UIColor.whiteColor()
-    public var playbackAnimationDuration: CFTimeInterval = PlaybackButton.kDefaultDuration
+    open var pausingColor = UIColor.white
+    open var playingColor = UIColor.white
+    open var pendingColor = UIColor.white
+    open var playbackAnimationDuration: CFTimeInterval = PlaybackButton.kDefaultDuration
     
     override init() {
         super.init()
     }
     
-    override init(layer: AnyObject) {
+    override init(layer: Any) {
         super.init(layer: layer)
         if let playbackLayer = layer as? PlaybackLayer {
             self.adjustMarginValue = playbackLayer.adjustMarginValue
@@ -85,15 +85,15 @@ import UIKit
         self.removeAllAnimations()
     }
     
-    public func setButtonState(buttonState: PlaybackButtonState, animated: Bool) {
+    open func setButtonState(_ buttonState: PlaybackButtonState, animated: Bool) {
         if self.buttonState == buttonState {
             return
         }
         self.buttonState = buttonState
         
         if animated {
-            if self.animationForKey(PlaybackLayer.kAnimationIdentifier) != nil {
-                self.removeAnimationForKey(PlaybackLayer.kAnimationIdentifier)
+            if self.animation(forKey: PlaybackLayer.kAnimationIdentifier) != nil {
+                self.removeAnimation(forKey: PlaybackLayer.kAnimationIdentifier)
             }
             
             let fromValue: CGFloat = self.playbackValue
@@ -103,30 +103,30 @@ import UIKit
             animation.fromValue = fromValue
             animation.toValue = toValue
             animation.duration = self.playbackAnimationDuration
-            animation.removedOnCompletion = true
+            animation.isRemovedOnCompletion = true
             animation.fillMode = kCAFillModeForwards
             animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
             animation.delegate = self
-            self.addAnimation(animation, forKey: PlaybackLayer.kAnimationIdentifier)
+            self.add(animation, forKey: PlaybackLayer.kAnimationIdentifier)
         } else {
             self.playbackValue = buttonState.value
         }
     }
     
-    public override class func needsDisplayForKey(key: String) -> Bool {
+    open override class func needsDisplay(forKey key: String) -> Bool {
         if key == PlaybackLayer.kAnimationKey {
             return true
         }
-        return CALayer.needsDisplayForKey(key)
+        return CALayer.needsDisplay(forKey: key)
     }
 
-    public override func drawInContext(context: CGContext) {
+    open override func draw(in context: CGContext) {
         switch self.buttonState {
-        case .None:
+        case .none:
             return
-        case .Pausing, .Pending, .Playing:
+        case .pausing, .pending, .playing:
             
-            let rect = CGContextGetClipBoundingBox(context)
+            let rect = context.boundingBoxOfClipPath
             let baseWidth = rect.width
             let baseHeight = rect.height
             let topMargin: CGFloat = self.contentEdgeInsets.top
@@ -146,57 +146,57 @@ import UIKit
             let h1: CGFloat = height / 4.0 * self.playbackValue
             let h2: CGFloat = height / 2.0 * self.playbackValue
             
-            CGContextMoveToPoint(context, leftMargin + adjustMargin, topMargin)
-            CGContextAddLineToPoint(context, leftMargin + adjustMargin + width, topMargin + h1)
-            CGContextAddLineToPoint(context, leftMargin + adjustMargin + width, topMargin + height - h1)
-            CGContextAddLineToPoint(context, leftMargin + adjustMargin, topMargin + height)
+            context.move(to: CGPoint(x: leftMargin + adjustMargin, y: topMargin))
+            context.addLine(to: CGPoint(x: leftMargin + adjustMargin + width, y: topMargin + h1))
+            context.addLine(to: CGPoint(x: leftMargin + adjustMargin + width, y: topMargin + height - h1))
+            context.addLine(to: CGPoint(x: leftMargin + adjustMargin, y: topMargin + height))
             
-            CGContextMoveToPoint(context, leftMargin + drawHalfWidth + adjustMargin, topMargin + h1)
-            CGContextAddLineToPoint(context, leftMargin + drawHalfWidth + adjustMargin + width, topMargin + h2)
-            CGContextAddLineToPoint(context, leftMargin + drawHalfWidth + adjustMargin + width, topMargin + height - h2)
-            CGContextAddLineToPoint(context, leftMargin + drawHalfWidth + adjustMargin, topMargin + height - h1)
+            context.move(to: CGPoint(x: leftMargin + drawHalfWidth + adjustMargin, y: topMargin + h1))
+            context.addLine(to: CGPoint(x: leftMargin + drawHalfWidth + adjustMargin + width, y: topMargin + h2))
+            context.addLine(to: CGPoint(x: leftMargin + drawHalfWidth + adjustMargin + width, y: topMargin + height - h2))
+            context.addLine(to: CGPoint(x: leftMargin + drawHalfWidth + adjustMargin, y: topMargin + height - h1))
             
-            CGContextSetFillColorWithColor(context, self.buttonState.color(self))
-            CGContextFillPath(context)
+            context.setFillColor(self.buttonState.color(self))
+            context.fillPath()
         }
     }
 }
 
 extension PlaybackLayer: CAAnimationDelegate {
     
-    public func animationDidStop(anim: CAAnimation, finished flag: Bool) {
+    open func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         if flag {
-            if self.animationForKey(PlaybackLayer.kAnimationIdentifier) != nil {
-                self.removeAnimationForKey(PlaybackLayer.kAnimationIdentifier)
+            if self.animation(forKey: PlaybackLayer.kAnimationIdentifier) != nil {
+                self.removeAnimation(forKey: PlaybackLayer.kAnimationIdentifier)
             }
-            if let toValue : CGFloat = anim.valueForKey("toValue") as? CGFloat {
+            if let toValue : CGFloat = anim.value(forKey: "toValue") as? CGFloat {
                 self.playbackValue = toValue
             }
         }
     }
 }
 
-@objc public class PlaybackButton : UIButton {
+@objc open class PlaybackButton : UIButton {
     
     static let kDefaultDuration: CFTimeInterval = 0.24
-    public var playbackLayer: PlaybackLayer?
-    public var duration: CFTimeInterval = PlaybackButton.kDefaultDuration {
+    open var playbackLayer: PlaybackLayer?
+    open var duration: CFTimeInterval = PlaybackButton.kDefaultDuration {
         didSet {
             self.playbackLayer?.playbackAnimationDuration = self.duration
         }
     }
     
-    public var buttonState: PlaybackButtonState {
-        return self.playbackLayer?.buttonState ?? PlaybackButtonState.Pausing
+    open var buttonState: PlaybackButtonState {
+        return self.playbackLayer?.buttonState ?? PlaybackButtonState.pausing
     }
 
-    public override var contentEdgeInsets: UIEdgeInsets {
+    open override var contentEdgeInsets: UIEdgeInsets {
         didSet {
             self.playbackLayer?.contentEdgeInsets = self.contentEdgeInsets
         }
     }
     
-    public var adjustMargin: CGFloat = 1 {
+    open var adjustMargin: CGFloat = 1 {
         didSet {
             self.playbackLayer?.adjustMarginValue = self.adjustMargin
         }
@@ -212,39 +212,39 @@ extension PlaybackLayer: CAAnimationDelegate {
         self.addPlaybackLayer()
     }
     
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
     }
     
-    public func setButtonState(buttonState: PlaybackButtonState, animated: Bool) {
+    open func setButtonState(_ buttonState: PlaybackButtonState, animated: Bool) {
         self.playbackLayer?.setButtonState(buttonState, animated: animated)
     }
 
-    public func setButtonColor(color: UIColor) {
+    open func setButtonColor(_ color: UIColor) {
         self.playbackLayer?.pausingColor = color
         self.playbackLayer?.playingColor = color
         self.playbackLayer?.pendingColor = color
     }
     
-    public func setButtonColor(color: UIColor, buttonState: PlaybackButtonState) {
+    open func setButtonColor(_ color: UIColor, buttonState: PlaybackButtonState) {
         switch buttonState {
-        case .None:
+        case .none:
             break
-        case .Pausing:
+        case .pausing:
             self.playbackLayer?.pausingColor = color
-        case .Playing:
+        case .playing:
             self.playbackLayer?.playingColor = color
-        case .Pending:
+        case .pending:
             self.playbackLayer?.pendingColor = color
         }
     }
     
-    private func addPlaybackLayer() {
+    fileprivate func addPlaybackLayer() {
         let playbackLayer = PlaybackLayer()
         playbackLayer.frame = self.bounds
         playbackLayer.adjustMarginValue = self.adjustMargin
         playbackLayer.contentEdgeInsets = self.contentEdgeInsets
-        playbackLayer.playbackValue = PlaybackButtonState.Pausing.value
+        playbackLayer.playbackValue = PlaybackButtonState.pausing.value
         playbackLayer.pausingColor = self.tintColor
         playbackLayer.playingColor = self.tintColor
         playbackLayer.pendingColor = self.tintColor
