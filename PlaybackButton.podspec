@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "PlaybackButton"
-  s.version      = "0.3.0"
+  s.version      = "0.4.0"
   s.summary      = "iOS animation playback button inspired by the playback button of YouTube for web."
   s.homepage     = "https://github.com/dekatotoro/PlaybackButton"
   s.license      = { :type => "MIT", :file => "LICENSE" }
