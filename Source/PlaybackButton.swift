@@ -113,18 +113,6 @@ import UIKit
         }
     }
     
-    public override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
-        if flag {
-            if self.animationForKey(PlaybackLayer.kAnimationIdentifier) != nil {
-                self.removeAnimationForKey(PlaybackLayer.kAnimationIdentifier)
-            }
-            if let toValue : CGFloat = anim.valueForKey("toValue") as? CGFloat {
-                self.playbackValue = toValue
-            }
-        }
-    }
-
-    
     public override class func needsDisplayForKey(key: String) -> Bool {
         if key == PlaybackLayer.kAnimationKey {
             return true
@@ -172,7 +160,20 @@ import UIKit
             CGContextFillPath(context)
         }
     }
+}
 
+extension PlaybackLayer: CAAnimationDelegate {
+    
+    public func animationDidStop(anim: CAAnimation, finished flag: Bool) {
+        if flag {
+            if self.animationForKey(PlaybackLayer.kAnimationIdentifier) != nil {
+                self.removeAnimationForKey(PlaybackLayer.kAnimationIdentifier)
+            }
+            if let toValue : CGFloat = anim.valueForKey("toValue") as? CGFloat {
+                self.playbackValue = toValue
+            }
+        }
+    }
 }
 
 @objc public class PlaybackButton : UIButton {

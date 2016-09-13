@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         self.playbackButton1.adjustMargin = 1
         self.playbackButton1.backgroundColor = UIColor.clearColor()
         self.playbackButton1.setButtonColor(UIColor(hex: "2c3e50", alpha: 1.0))
-        self.playbackButton1.addTarget(self, action: "didTapPlaybackButton1:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.playbackButton1.addTarget(self, action: #selector(ViewController.didTapPlaybackButton1(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(self.playbackButton1)
         
         // playbackButton2
